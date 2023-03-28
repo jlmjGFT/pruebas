@@ -7,6 +7,11 @@
     tools:context=".MainActivity">
 
 
+    <!-- Aqui se inicializa el flujo del
+    xml creado con nombre nav_pokemon,
+     en esta vista se mostrara el contenido
+     de los flujos -->
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"

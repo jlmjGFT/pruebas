@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- inicio de la navegacion del flujo de pokemones,
+se muestra de entrada el fragmento "PokemonListFragment"
+por medio del identificador "pokemonListFragment"-->
+
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_pokemon"
     app:startDestination="@id/pokemonListFragment">
+
+    <!-- componente navigation que contiene el Fragmento
+     "PokemonListFragment"-->
     <fragment
         android:id="@+id/pokemonListFragment"
         android:name="com.example.pokemonapp.PokemonListFragment"
         android:label="fragment_pokemon_list"
         tools:layout="@layout/fragment_pokemon_list" >
 
+        <!-- Enlace de flujo que invoca el detalle de pokemon
+         por medio del listado general-->
         <action
             android:id="@+id/action_pokemonListFragment_to_pokemonDetailFragment"
             app:destination="@id/pokemonDetailFragment" />
     </fragment>
+
+    <!-- componente navigation que contiene el Fragmento
+   "PokemonDetailFragment"-->
     <fragment
         android:id="@+id/pokemonDetailFragment"
         android:name="com.example.pokemonapp.PokemonDetailFragment"
         android:label="fragment_pokemon_detail"
         tools:layout="@layout/fragment_pokemon_detail" >
-
-
     </fragment>
 </navigation>
