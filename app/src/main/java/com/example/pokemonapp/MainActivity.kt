@@ -14,15 +14,8 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        //se enlaza la vista con la clase
         setContentView(R.layout.activity_main)
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }
