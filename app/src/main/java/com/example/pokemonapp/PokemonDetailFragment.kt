@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.navigation.fragment.findNavController
+import kotlinx.android.synthetic.main.fragment_pokemon_detail.*
 
 /**
  * Clase para obtener el detalle de los pokemones
@@ -44,7 +45,7 @@ class PokemonDetailFragment : Fragment() {
     private fun addActions() {
 
         // boton regresar al hacer onClick
-        requireView().findViewById<Button>(R.id.btn_regresar).setOnClickListener {
+        btn_regresar.setOnClickListener {
             // quita el fragmento actual de la pila
             findNavController().popBackStack()
         }
