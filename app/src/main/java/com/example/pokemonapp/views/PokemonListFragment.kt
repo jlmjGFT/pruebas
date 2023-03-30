@@ -1,23 +1,46 @@
-package com.example.pokemonapp
+package com.example.pokemonapp.views
 
+import android.app.ProgressDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.pokemonapp.R
+import com.example.pokemonapp.utils.api.Resource
+import com.example.pokemonapp.utils.api.Status
+import com.example.pokemonapp.utils.dto.PokemonModel
+import com.example.pokemonapp.viewmodel.PokemonViewModel
 
 /**
  * Clase para enlistar los pokemones obtenidos
  */
 class PokemonListFragment : Fragment() {
 
+
+    private lateinit var viewmodel : PokemonViewModel
+
+    private val pokemonListObserver =  Observer<Resource<List<PokemonModel>>>{
+        when (it.status){
+            Status.LOADING->{
+            }
+            Status.SUCCESS->{
+            }
+            Status.ERROR->{
+            }
+        }
+    }
+
     /**
      * clase "constructora" del fragmento (normalmente utilizada para inicializar viewmodels)
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewmodel = ViewModelProvider(requireActivity()).get(PokemonViewModel::class.java)
     }
 
     /**
@@ -43,6 +66,8 @@ class PokemonListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         addActions()
+        createObservers()
+        viewmodel.getPokemons()
     }
 
     /**
@@ -55,5 +80,9 @@ class PokemonListFragment : Fragment() {
             findNavController().navigate(R.id.action_pokemonListFragment_to_pokemonDetailFragment)
         }
 
+    }
+
+    private fun createObservers() {
+        viewmodel.pokemonList.observe(viewLifecycleOwner,pokemonListObserver)
     }
 }
