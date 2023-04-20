@@ -10,11 +10,14 @@ import android.widget.Button
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokemonapp.R
 import com.example.pokemonapp.utils.api.Resource
 import com.example.pokemonapp.utils.api.Status
 import com.example.pokemonapp.utils.dto.PokemonModel
 import com.example.pokemonapp.viewmodel.PokemonViewModel
+import com.example.pokemonapp.views.adapter.PokemonListAdapter
+import kotlinx.android.synthetic.main.fragment_pokemon_list.*
 
 /**
  * Clase para enlistar los pokemones obtenidos
@@ -27,8 +30,11 @@ class PokemonListFragment : Fragment() {
     private val pokemonListObserver =  Observer<Resource<List<PokemonModel>>>{
         when (it.status){
             Status.LOADING->{
+
             }
             Status.SUCCESS->{
+                val adapter = PokemonListAdapter(it.data!!)
+                rv_pokemon_list.adapter = adapter
             }
             Status.ERROR->{
             }
@@ -65,21 +71,9 @@ class PokemonListFragment : Fragment() {
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        addActions()
         createObservers()
         viewmodel.getPokemons()
-    }
-
-    /**
-     * Metodo para instanciar los llamados de la vista de los objetos que se muestran en el xml
-     */
-    fun addActions(){
-        // boton siguiente al hacer onClick
-        requireView().findViewById<Button>(R.id.btn_siguiente).setOnClickListener {
-            // agrega el fragmento de detalle del pokemon a la pila y enlaza la navegacion a la siguiente pantalla
-            findNavController().navigate(R.id.action_pokemonListFragment_to_pokemonDetailFragment)
-        }
-
+        rv_pokemon_list.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun createObservers() {
