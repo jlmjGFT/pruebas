@@ -33,7 +33,12 @@ class PokemonListFragment : Fragment() {
 
             }
             Status.SUCCESS->{
-                val adapter = PokemonListAdapter(it.data!!)
+                val adapter = PokemonListAdapter(it.data!!,object : PokemonListAdapter.OnItemClickListener{
+                    override fun onItemlick(position: Int) {
+                        viewmodel.setSelectedPokemon(position)
+                        findNavController().navigate(R.id.action_pokemonListFragment_to_pokemonDetailFragment)
+                    }
+                })
                 rv_pokemon_list.adapter = adapter
             }
             Status.ERROR->{

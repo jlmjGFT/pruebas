@@ -1,5 +1,6 @@
 package com.example.pokemonapp.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -46,5 +47,10 @@ class PokemonViewModel : ViewModel(){
                 pokemonList.value = result
             }
         }
+    }
+
+    fun setSelectedPokemon(position: Int) {
+        val pokemon = pokemonList.value!!.data!![position]
+        Log.i(this.javaClass.simpleName, "************************************Este es el pokemon:${pokemon.name}")
     }
 }
