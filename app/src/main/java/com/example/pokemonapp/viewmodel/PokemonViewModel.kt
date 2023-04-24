@@ -16,6 +16,8 @@ import kotlinx.coroutines.withContext
  */
 class PokemonViewModel : ViewModel(){
 
+    val pokemon = MutableLiveData<PokemonModel>()
+
     /**
      * instancia de la invocación del repositorio
      */
@@ -50,7 +52,7 @@ class PokemonViewModel : ViewModel(){
     }
 
     fun setSelectedPokemon(position: Int) {
-        val pokemon = pokemonList.value!!.data!![position]
-        Log.i(this.javaClass.simpleName, "************************************Este es el pokemon:${pokemon.name}")
+        pokemon.value = pokemonList.value!!.data!![position]
+        Log.i(this.javaClass.simpleName, "************************************Este es el pokemon:${pokemon.value!!.name}")
     }
 }
